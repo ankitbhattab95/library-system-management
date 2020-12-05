@@ -15,11 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       underscored: true,
+      paranoid: true,
     }
   );
   Author.associate = function (models) {
     // associations can be defined here
-    Author.hasOne(models.book, { foreignKey: "author_id", as: "books" });
+    Author.hasMany(models.book, { foreignKey: "author_id", as: "books" });
   };
   return Author;
 };

@@ -40,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       underscored: true,
+      paranoid: true,
     }
   );
   Members.associate = function (models) {

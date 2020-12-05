@@ -6,9 +6,9 @@ const config = require("./../config/config");
 const errMiddleware = require("./../middleware/error-middleware");
 const models = require("./../models");
 
+const app = express();
 class ExpressLoader {
   constructor() {
-    const app = express();
     // for parsing application/json
     app.use(bodyParser.json());
     // for parsing application/x www-form-urlencoded
@@ -21,4 +21,7 @@ class ExpressLoader {
     });
   }
 }
-module.exports = ExpressLoader;
+module.exports = {
+  ExpressLoader,
+  app,
+};

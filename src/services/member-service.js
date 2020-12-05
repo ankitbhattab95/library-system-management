@@ -1,30 +1,47 @@
-const memberModel = require("./../models").member;
+const db = require("./../models");
+const DataService = require("./data-service");
 
 class MemberService {
   constructor() {}
   async saveMember(memberData) {
-    if (!memberData) {
-      throw new Error("Please provide valid members data.");
+    try {
+      if (!memberData) {
+        throw new Error("Please provide valid members data.");
+      }
+      return await DataService.create(db.member, memberData);
+    } catch (e) {
+      throw e.error || e;
     }
-    return await memberModel.create(memberData);
   }
 
   async getAllMembers() {
-    return await memberModel.findAll();
+    try {
+      return await DataService.findAll(db.member);
+    } catch (e) {
+      throw e.error || e;
+    }
   }
 
   async getMemberById(id) {
-    if (!id) {
-      throw new Error("Please provide valid members data.");
+    try {
+      if (!id) {
+        throw new Error("Please provide valid members data.");
+      }
+      return await DataService.findOne(db.author, { id: id });
+    } catch (e) {
+      throw e.error || e;
     }
-    return await memberModel.findOne({ where: { id: id } });
   }
 
   async deleteMemberById(id) {
-    if (!id) {
-      throw new Error("Please provide valid members data.");
+    try {
+      if (!id) {
+        throw new Error("Please provide valid members data.");
+      }
+      return await DataService.destroy(db.author, { id: id });
+    } catch (e) {
+      throw e.error || e;
     }
-    return await memberModel.destroy({ where: { id: id } });
   }
 }
 module.exports = MemberService;

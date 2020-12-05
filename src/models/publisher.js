@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       underscored: true,
+      paranoid: true,
     }
   );
   Publisher.associate = function (models) {

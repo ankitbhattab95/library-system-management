@@ -1,30 +1,47 @@
-const authorModel = require("./../models").author;
+const db = require("./../models");
+const DataService = require("./data-service");
 
 class AuthorService {
   constructor() {}
   async saveAuthor(authorData) {
-    if (!authorData) {
-      throw new Error("Please provide valid author data.");
+    try {
+      if (!authorData) {
+        throw new Error("Please provide valid author data.");
+      }
+      return await DataService.create(db.author, authorData);
+    } catch (e) {
+      throw e.error || e;
     }
-    return await authorModel.create(authorData);
   }
 
   async getAllAuthor() {
-    return await authorModel.findAll();
+    try {
+      return await DataService.findAll(db.author);
+    } catch (e) {
+      throw e.error || e;
+    }
   }
 
   async getAuthorById(id) {
-    if (!id) {
-      throw new Error("Please provide valid author data.");
+    try {
+      if (!id) {
+        throw new Error("Please provide valid author data.");
+      }
+      return await DataService.findOne(db.author, { id: id });
+    } catch (e) {
+      throw e.error || e;
     }
-    return await authorModel.findOne({ where: { id: id } });
   }
 
   async deleteAuthorById(id) {
-    if (!id) {
-      throw new Error("Please provide valid author data.");
+    try {
+      if (!id) {
+        throw new Error("Please provide valid author data.");
+      }
+      return await DataService.destroy(db.author, { id: id });
+    } catch (e) {
+      throw e.error || e;
     }
-    return await authorModel.destroy({ where: { id: id } });
   }
 }
 module.exports = AuthorService;

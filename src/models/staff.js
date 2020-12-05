@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       underscored: true,
+      paranoid: true,
     }
   );
   Staff.associate = function (models) {

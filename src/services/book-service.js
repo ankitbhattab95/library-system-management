@@ -1,38 +1,54 @@
-const sequelize = require("./../database/sequelize");
-const models = require("./../models");
-const { fn, col } = models.Sequelize;
-const bookModel = models.book;
+const db = require("./../models");
+const DataService = require("./data-service");
 
 class BookService {
   constructor() {}
 
   async saveBook(bookData) {
-    if (!bookData) {
-      throw new Error("Please provide valid books data.");
+    try {
+      if (!bookData) {
+        throw new Error("Please provide valid books data.");
+      }
+      return await DataService.create(db.book, bookData);
+    } catch (e) {
+      throw e.error || e;
     }
-    return await sequelize.transaction(async (t) => {
-      return await bookModel.create(bookData, { transaction: t });
-    });
   }
 
   async getAllBooks() {
-    return await bookModel.findAll();
+    try {
+    } catch (e) {
+      throw e.error || e;
+    }
   }
 
   async getBookById(id) {
-    if (!id) {
-      throw new Error("Please provide valid book data.");
+    try {
+      if (!id) {
+        throw new Error("Please provide valid book data.");
+      }
+      return await DataService.findOne(db.book, { id: id });
+    } catch (e) {
+      throw e.error || e;
     }
-    return await bookModel.findOne({ where: { id: id } });
   }
 
   async deleteBookById() {
-    if (!id) {
-      throw new Error("Please provide valid book data.");
+    try {
+      if (!id) {
+        throw new Error("Please provide valid book data.");
+      }
+      return await bookModel.destroy(db.book, { id: id });
+    } catch (e) {
+      throw e.error || e;
     }
-    return await bookModel.destroy({ where: { id: id } });
   }
 
-  async updateBook() {}
+  async updateBook() {
+    try {
+    } catch (e) {
+      throw e.error || e;
+    }
+  }
 }
 module.exports = BookService;

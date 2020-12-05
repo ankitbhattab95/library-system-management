@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      // freewzTableName: "staff_master",
       underscored: true,
+      paranoid: true,
     }
   );
   Book.associate = function (models) {
