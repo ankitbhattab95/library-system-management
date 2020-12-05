@@ -4,9 +4,8 @@ const bookServiceInstance = new BookService();
 const sequelizeQueryService = new SequelizeQueryService();
 
 const saveBook = async (req, resp, next) => {
-  const { title, copies, price, author_id, publisher_id } = req.body;
-
   try {
+    const { title, copies, price, author_id, publisher_id } = req.body;
     const bookData = {
       title: title,
       copies: copies,
@@ -15,8 +14,6 @@ const saveBook = async (req, resp, next) => {
       publisher_id: publisher_id,
     };
     const book = await bookServiceInstance.saveBook(bookData);
-    console.log(book);
-
     resp.status(201).send({ book: book, status: true });
   } catch (e) {
     console.log(e);

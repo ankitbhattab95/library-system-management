@@ -17,6 +17,7 @@ class BookService {
 
   async getAllBooks() {
     try {
+      return await DataService.findAll(db.book);
     } catch (e) {
       throw e.error || e;
     }

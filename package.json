@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "env-cmd -f src/config/dev.env npx nodemon src/app.js",
     "start": "node src/app.js ",
-    "test": "env-cmd -f src/config/test.env jest --watch"
+    "test": "env-cmd -f src/config/test.env jest --watch",
+    "migrate": "env-cmd -f src/config/dev.env npx sequelize-cli db:migrate:undo && npx sequelize-cli db:migrate"
   },
   "jest": {
     "testEnvironment": "node"
@@ -29,6 +30,7 @@
     "eslint": "^7.13.0",
     "jest": "^26.6.3",
     "nodemon": "^2.0.4",
+    "sequelize-cli": "^6.2.0",
     "supertest": "^6.0.1"
   }
 }
