@@ -8,24 +8,24 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    await queryInterface.createTable("books", {
+    await queryInterface.createTable("book_authors", {
       id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         primaryKey: true,
         autoIncrement: true,
       },
-      title: Sequelize.STRING,
-      copies: Sequelize.INTEGER,
-      price: Sequelize.FLOAT,
-      available: {
-        type: Sequelize.ENUM("0", "1"),
-        defaultValue: "1",
-      },
-      publisher_id: {
+      book_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
-          model: "publishers",
+          model: "books",
+          key: "id",
+        },
+      },
+      author_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "authors",
           key: "id",
         },
       },
@@ -35,9 +35,6 @@ module.exports = {
       },
       updated_at: {
         allowNull: false,
-        type: Sequelize.DATE,
-      },
-      deleted_at: {
         type: Sequelize.DATE,
       },
     });

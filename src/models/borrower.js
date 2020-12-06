@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   borrower.init(
     {
       issue_date: DataTypes.DATE,
-      return_date: DataTypes.DATE,
+      return_date: DataTypes.DATE, // issue date + 7
     },
     {
       sequelize,

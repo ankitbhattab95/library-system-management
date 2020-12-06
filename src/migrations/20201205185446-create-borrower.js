@@ -8,6 +8,27 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      member_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "members",
+          key: "id",
+        },
+      },
+      book_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "books",
+          key: "id",
+        },
+      },
+      staff_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "staffs",
+          key: "id",
+        },
+      },
       issue_date: {
         type: Sequelize.DATE,
       },
